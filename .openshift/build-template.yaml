@@ -9,9 +9,9 @@ objects:
   - kind: ImageStream
     apiVersion: image.openshift.io/v1
     metadata:
-      name: ${NAME}
+      name: ${BASE_NAME}
       labels:
-        build: ${NAME}
+        build: ${BASE_NAME}
     spec:
       lookupPolicy:
         local: false
@@ -27,14 +27,14 @@ objects:
   - kind: BuildConfig
     apiVersion: build.openshift.io/v1
     metadata:
-      name: sabnzbd
+      name: ${BASE_NAME}-${ID}
       labels:
-        build: ${NAME}
+        build: ${BASE_NAME}
     spec:
       output:
         to:
           kind: ${BUILD_OUTPUT_KIND}
-          name: ${BUILD_OUTPUT_NAME}
+          name: "${BUILD_OUTPUT_NAME}:${SABNZBD_VERSION}"
         pushSecret:
           name: ${BUILD_OUTPUT_SECRET}
       resources: {}
@@ -43,9 +43,12 @@ objects:
       strategy:
         type: Docker
         dockerStrategy:
+          buildArgs:
+            - name: SABNZBD_VERSION
+              value: ${SABNZBD_VERSION}
           from:
             kind: ImageStreamTag
-            name: '${NAME}:source'
+            name: '${BASE_NAME}:source'
       postCommit:
         script: '/sabnzbd/test.sh'
       source:
@@ -66,7 +69,7 @@ parameters:
     value: DockerImage
   - name: BUILD_OUTPUT_NAME
     required: true
-    value: "quay.io/parflesh/sabnzbd:latest"
+    value: "quay.io/parflesh/sabnzbd"
   - name: BUILD_OUTPUT_KIND
     required: true
     value: DockerImage
@@ -77,6 +80,11 @@ parameters:
     required: true
     value: "https://github.com/ParFlesh/sabnzbd.git"
   - name: GIT_SOURCE_REF
-  - name: NAME
+  - name: BASE_NAME
     required: true
     value: sabnzbd
+  - name: ID
+    required: true
+    value: "latest"
+  - name: SABNZBD_VERSION
+    value: "latest"
