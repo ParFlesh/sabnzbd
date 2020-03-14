@@ -63,7 +63,7 @@ objects:
 parameters:
   - name: IMAGE_SOURCE_NAME
     required: true
-    value: "debian:buster-slim"
+    value: "ubuntu:rolling"
   - name: IMAGE_SOURCE_KIND
     required: true
     value: DockerImage

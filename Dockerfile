@@ -1,9 +1,8 @@
-FROM debian:buster-slim as artifact
+FROM ubuntu:rolling as artifact
 
 ARG SABNZBD_VERSION=""
 
 RUN export DEBIAN_FRONTEND=noninteractive &&\
-    sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main non-free#g" /etc/apt/sources.list &&\
     apt-get -q update &&\
     apt-get install -qqy curl &&\
     if [ "latest" != "$SABNZBD_VERSION" ]; then VERSION=$SABNZBD_VERSION ; else VERSION=$(curl https://github.com/sabnzbd/sabnzbd/releases/latest 2>/dev/null | awk -F'"' '{print $2}' | awk -F'/' '{print $NF}');fi && \
@@ -17,7 +16,7 @@ ADD test.sh /sabnzbd/
 RUN chmod 755 /sabnzbd/test.sh && \
     chown 1001:0 /sabnzbd/test.sh
 
-FROM debian:buster-slim
+FROM ubuntu:rolling
 MAINTAINER ParFlesh
 
 COPY --chown=1001:0 --from=artifact /sabnzbd /sabnzbd
