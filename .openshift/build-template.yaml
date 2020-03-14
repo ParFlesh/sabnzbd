@@ -1,7 +1,7 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
-  template: redis-ephemeral-template
+  template: sabnzbd-build-template
 metadata:
   annotations:
   name: sabnzbd-build
