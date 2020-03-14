@@ -59,7 +59,7 @@ objects:
 parameters:
   - name: IMAGE_SOURCE_NAME
     required: true
-    value: "debian:buster"
+    value: "debian:buster-slim"
   - name: IMAGE_SOURCE_KIND
     required: true
     value: DockerImage
