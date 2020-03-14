@@ -12,6 +12,11 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
     chown -R 1001:0 /sabnzbd &&\
     chmod -R g=u /sabnzbd
 
+ADD test.sh /sabnzbd/
+
+RUN chmod 755 /sabnzbd/test.sh && \
+    chown 1001:0 /sabnzbd/test.sh
+
 FROM debian:buster-slim
 MAINTAINER ParFlesh
 
@@ -28,9 +33,9 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
     chown 1001:0 /datadir /media && \
     chmod 770 /datadir /media
 
+ADD test.sh /
 VOLUME ["/datadir", "/media"]
 EXPOSE 8080
 WORKDIR /sabnzbd
-USER 1001
 ENTRYPOINT ["/sabnzbd/SABnzbd.py"]
 CMD ["-b", "0", "-f", "/datadir/config.ini", "-s", "0.0.0.0:8080", "--disable-file-log"]

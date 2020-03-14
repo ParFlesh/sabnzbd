@@ -46,7 +46,8 @@ objects:
           from:
             kind: ImageStreamTag
             name: '${NAME}:source'
-      postCommit: {}
+      postCommit:
+        script: '/sabnzbd/test.sh'
       source:
         type: Git
         git:
