@@ -28,13 +28,13 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
     apt-get install --no-install-recommends -qqy python python-cheetah python-sabyenc python-cryptography par2 unrar p7zip-full unzip openssl python-openssl ca-certificates &&\
     rm -rf /var/lib/apt/lists/* &&\
     rm -rf /tmp/* && \
-    mkdir -p /datadir /media && \
-    chown 1001:0 /datadir /media && \
-    chmod 770 /datadir /media
+    mkdir -p /config /media && \
+    chown 1001:0 /config /media && \
+    chmod 770 /config /media
 
 ADD test.sh /
-VOLUME ["/datadir", "/media"]
+VOLUME ["/config", "/media"]
 EXPOSE 8080
 WORKDIR /sabnzbd
 ENTRYPOINT ["/sabnzbd/SABnzbd.py"]
-CMD ["-b", "0", "-f", "/datadir/config.ini", "-s", "0.0.0.0:8080", "--disable-file-log"]
+CMD ["-b", "0", "-f", "/config/config.ini", "-s", "0.0.0.0:8080", "--disable-file-log"]
