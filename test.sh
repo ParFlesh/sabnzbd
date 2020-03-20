@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-/sabnzbd/SABnzbd.py -b 0 -f /datadir/config.ini -s 0.0.0.0:8080 --disable-file-log &
+/sabnzbd/SABnzbd.py -b 0 -f /config/config.ini -s 0.0.0.0:8080 --disable-file-log &
 
 export DEBIAN_FRONTEND=noninteractive
 sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main non-free#g" /etc/apt/sources.list
