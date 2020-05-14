@@ -26,7 +26,7 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
     apt-get -q update && \
     apt-get install --no-install-recommends -qqy software-properties-common && \
     sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main non-free#g" /etc/apt/sources.list &&\
-    add-apt-repository ppa:jcfp/sab-addons && \
+    add-apt-repository -sny ppa:jcfp/sab-addons && \
     apt-get -q update &&\
     apt-get install --no-install-recommends -qqy python python-cheetah python-sabyenc python-cryptography par2 unrar p7zip-full unzip openssl python-openssl ca-certificates &&\
     apt-get remove -qqy software-properties-common && \
