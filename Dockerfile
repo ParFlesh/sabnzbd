@@ -23,14 +23,10 @@ COPY --chown=1001:0 --from=artifact /sabnzbd /sabnzbd
 ENV LANG C.UTF-8
 
 RUN export DEBIAN_FRONTEND=noninteractive &&\
-    apt-get -q update && \
-    apt-get install --no-install-recommends -qqy software-properties-common && \
     sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main non-free#g" /etc/apt/sources.list &&\
-    add-apt-repository -sny ppa:jcfp/sab-addons && \
     apt-get -q update &&\
-    apt-get install --no-install-recommends -qqy python python-cheetah python-sabyenc python-cryptography par2 unrar p7zip-full unzip openssl python-openssl ca-certificates &&\
-    apt-get remove -qqy software-properties-common && \
-    apt-get autoremove -qqy && \
+    apt-get install --no-install-recommends -qqy python python-cheetah python-cryptography par2 unrar p7zip-full unzip openssl python-openssl ca-certificates &&\
+    pip install sabyenc && \
     rm -rf /var/lib/apt/lists/* &&\
     rm -rf /tmp/* && \
     mkdir -p /config /media && \
