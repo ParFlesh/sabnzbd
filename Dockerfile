@@ -25,8 +25,10 @@ ENV LANG C.UTF-8
 RUN export DEBIAN_FRONTEND=noninteractive &&\
     sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main non-free#g" /etc/apt/sources.list &&\
     apt-get -q update &&\
-    apt-get install --no-install-recommends -qqy python python-cheetah python-cryptography par2 unrar p7zip-full unzip openssl python-openssl ca-certificates &&\
+    apt-get install --no-install-recommends -qqy python python-pip python-cheetah python-cryptography par2 unrar p7zip-full unzip openssl python-openssl ca-certificates &&\
     pip install sabyenc && \
+    apt-get remove -qqy python-pip && \
+    apt-get autoremove -qqy && \
     rm -rf /var/lib/apt/lists/* &&\
     rm -rf /tmp/* && \
     mkdir -p /config /media && \
