@@ -27,6 +27,8 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
     apt-get install --no-install-recommends -qqy software-properties-common && \
     sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main non-free#g" /etc/apt/sources.list &&\
     add-apt-repository universe && \
+    add-apt-repository multiverse && \
+    add-apt-repository restricted && \
     apt-get -q update &&\
     apt-get install --no-install-recommends -qqy python python-pip python-cheetah python-cryptography par2 unrar p7zip-full unzip openssl python-openssl ca-certificates &&\
     pip install sabyenc && \
