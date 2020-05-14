@@ -24,7 +24,7 @@ ENV LANG C.UTF-8
 
 RUN export DEBIAN_FRONTEND=noninteractive &&\
     sed -i "s#deb http://deb.debian.org/debian buster main#deb http://deb.debian.org/debian buster main non-free#g" /etc/apt/sources.list &&\
-    echo "deb http://ppa.launchpad.net/jcfp/sab-addons/ubuntu focal main " >> /etc/apt/sources.list && \
+    add-apt-repository ppa:jcfp/sab-addons && \
     apt-get -q update &&\
     apt-get install --no-install-recommends -qqy python python-cheetah python-sabyenc python-cryptography par2 unrar p7zip-full unzip openssl python-openssl ca-certificates &&\
     rm -rf /var/lib/apt/lists/* &&\
