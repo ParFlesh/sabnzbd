@@ -28,7 +28,7 @@ jobs:
     - name: Test
       id: docker_test
       run: |
-        docker run --entrypoint /usr/bin/bash --rm ${{ env.TEST_TAG }} /sabnzbd/test.sh
+        docker run --entrypoint /usr/bin/bash --rm ${{ env.TEST_TAG }} /test.sh
     - name: Docker Login
       id: docker_login
       uses: docker/login-action@v1.10.0
