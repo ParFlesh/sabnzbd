@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:focal
 LABEL maintainer='ParFlesh'
 
 ENV LANG=C.UTF-8 \
